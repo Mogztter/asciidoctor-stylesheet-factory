@@ -251,8 +251,12 @@ b.button:after {
 #content,
 #footnotes,
 #footer {
-  @include grid-row;
-  @include grid-column($float: false);
+  width: 100%;
+  margin: 2em auto 0;
+  max-width: 62.5em;
+  position: relative;
+  padding-left: em-calc(30) / 2;
+  padding-right: em-calc(30) / 2;
 }
 
 #content {

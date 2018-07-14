@@ -7,7 +7,6 @@
 
 body {
   background-image: image-url('riak/body-bg.jpg', false, false);
-  //@include bg-noise-mono(#f0f0f0, 4, .07, 200);
 }
 
 //@media #{$medium} {
@@ -81,16 +80,15 @@ p > em {
 
 .sidebarblock {
   background-image: image-url('riak/sidebar-bg.jpg', false, false);
-  //@include bg-noise-mono(#444445, 8, .125, 200);
   @include radius(5px);
   & > .content {
-    & > .title { 
+    & > .title {
       color: #f1f1f1;
       text-shadow: 0px 2px 2px black;
       font-size: emCalc(20px);
       font-weight: bold;
     }
-    ul, p { 
+    ul, p {
       color: #f1f1f1;
       text-shadow: 0px 1px 1px black;
     }

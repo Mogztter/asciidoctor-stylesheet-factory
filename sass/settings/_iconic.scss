@@ -15,7 +15,7 @@ $white: #fff;
 $em-base: 16px;
 $body-bg: $white;
 $body-font-color: $print-black;
-$body-font-family: Georgia, 'Times New Roman', serif; 
+$body-font-family: Georgia, 'Times New Roman', serif;
 $primary-color: $blue;
 $global-radius: 5px;
 
@@ -27,10 +27,10 @@ $header-top-margin: 1.25em;
 $header-bottom-margin: 0.45em;
 $title-font-color: $white;
 $subheader-font-color: $body-font-color;
-$h1-font-size: emCalc(38px);
-$h2-font-size: emCalc(26px);
-$h3-font-size: emCalc(23px);
-$h4-font-size: emCalc(17px);
+$h1-font-size: em-calc(38);
+$h2-font-size: em-calc(26);
+$h3-font-size: em-calc(23);
+$h4-font-size: em-calc(17);
 $sect-divider-size: 0;
 
 // Lists

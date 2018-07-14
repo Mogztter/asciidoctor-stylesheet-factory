@@ -1,7 +1,9 @@
 // TIP set a value to null to disable
 @import "normalize";
 $cursor-default-value: auto !default;
-@import "foundation/components/global";
+@import "foundation-global";
+@import "foundation-variables";
+@import "compass/functions";
 @import "compass/css3/box-shadow";
 
 // better defaults (TODO maybe do these at the bottom of the theme colors)
@@ -84,18 +86,3 @@ $experimental-support-for-microsoft: false;
 $experimental-support-for-mozilla: false;
 $experimental-support-for-opera: false;
 $experimental-support-for-webkit: true;
-
-// bg-noise from https://gist.github.com/aaronrussell/856571 by Aaron Russell
-$bg-noise-default-intensity: 0.5 !default;
-$bg-noise-default-opacity: 0.08 !default;
-$bg-noise-default-size: 200 !default;
-
-@mixin bg-noise($color, $intensity: $bg-noise-default-intensity, $opacity: $bg-noise-default-opacity, $size: $bg-noise-default-size, $mono: false) {
-  background-color: $color;
-  background-image: background_noise($color, $intensity, $opacity, $size, $mono);
-  background-repeat: repeat;
-}
- 
-@mixin bg-noise-mono($color, $intensity: $bg-noise-default-intensity, $opacity: $bg-noise-default-opacity, $size: $bg-noise-default-size) {
-  @include bg-noise($color, $intensity, $opacity, $size, true);
-}

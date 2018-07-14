@@ -1,0 +1,53 @@
+{
+  "name": "asciidoctor-stylesheets",
+  "version": "0.7.1",
+  "homepage": "https://asciidoctor.org",
+  "authors": [
+    "Dan Allen (https://github.com/mojavelinux)",
+    "Guillaume Grossetie (https://github.com/mogztter)"
+  ],
+  "description": "Modern CSS to style AsciiDoc HTML5 output",
+  "main": "asciidoctor.sass",
+  "style": "asciidoctor-stylesheets/css/asciidoctor.min.css",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mogztter/asciidoctor-stylesheets.git"
+  },
+  "license": "MIT",
+  "keywords": [
+    "css",
+    "sass",
+    "flexbox",
+    "responsive",
+    "asciidoctor",
+    "stylesheets"
+  ],
+  "bugs": {
+    "url": "https://github.com/mogztter/asciidoctor-stylesheets/issues"
+  },
+  "devDependencies": {
+    "autoprefixer": "^8.2.0",
+    "clean-css": "^4.1.11",
+    "compass-mixins": "^0.12.10",
+    "node-sass": "^4.9.2",
+    "normalize.css": "^8.0.0",
+    "postcss-cli": "^5.0.0",
+    "rimraf": "^2.6.2"
+  },
+  "scripts": {
+    "build": "npm run build-clean && npm run build-sass && npm run build-autoprefix && npm run build-cleancss",
+    "build-autoprefix": "node tasks/autoprefix.js",
+    "build-cleancss": "node tasks/cleancss.js",
+    "build-clean": "rimraf css",
+    "build-sass": "node tasks/sass.js",
+    "deploy": "npm run build",
+    "start": "node-sass --output-style expanded --source-map true --include-path node_modules/normalize.css --include-path node_modules/compass-mixins/lib sass/asciidoctor.scss css/asciidoctor.css --watch"
+  },
+  "files": [
+    "css",
+    "sass",
+    "asciidoctor.sass",
+    "LICENSE",
+    "README.adoc"
+  ]
+}

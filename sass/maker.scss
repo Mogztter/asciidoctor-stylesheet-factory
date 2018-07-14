@@ -2,7 +2,7 @@
 @import "settings/maker";
 @import "components/asciidoc";
 @import "components/awesome-icons";
-@import "compass/css3/border-radius";
+@import "node_modules/compass-mixins/lib/compass/css3/border-radius";
 
 body {
   background-image: image-url('maker/body-bg.png');

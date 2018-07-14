@@ -1,0 +1,11 @@
+sudo: false
+dist: trusty
+
+script:
+- "build-stylesheet.sh"
+
+language: node_js
+
+node_js:
+- 'lts/*'
+- 'node'

@@ -10,10 +10,10 @@ object, svg {
 .stretch {
   width: 100%;
 }
-@import "foundation/components/grid";
-@import "foundation/components/type";
-@import "foundation/components/panels";
-@import "foundation/components/tables";
+@import "foundation-grid";
+@import "foundation-type";
+@import "foundation-panels";
+@import "foundation-tables";
 $old-include-html-global-classes: $include-html-global-classes;
 $include-html-global-classes: false;
 $inline-list-bottom-margin: $paragraph-margin-bottom / 2 !default;
@@ -34,6 +34,14 @@ body {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   tab-size: 4;
+}
+
+@function headers($from:1, $to:6) {
+  @if $from == $to {
+    @return 'h#{$from}';
+  } @else {
+    @return 'h#{$from},' + headers($from+1, $to);
+  }
 }
 
 // Foundation reduces heading font size and line-height for screens below small breakpoint
@@ -350,7 +358,7 @@ b.button:after {
     margin-left: emCalc(2px);
   }
   ul.sectlevel0 > li > a {
-    font-style: italic; 
+    font-style: italic;
   }
   ul.sectlevel0 ul.sectlevel1 {
     margin: 0.5em 0;
@@ -651,7 +659,7 @@ table.tableblock #preamble > .sectionbody > [class="paragraph"]:first-of-type p 
   td.content {
     padding-left: emCalc(18px);
     padding-right: emCalc(20px);
-    border-left: $hr-border-width $hr-border-style $hr-border-color; 
+    border-left: $hr-border-width $hr-border-style $hr-border-color;
     // FIXME use $aside-font-color
     color: $blockquote-cite-font-color;
     // QUESTION use opacity instead of blockquote-cite-font-color?
@@ -748,7 +756,7 @@ table.tableblock #preamble > .sectionbody > [class="paragraph"]:first-of-type p 
       //overflow-wrap: normal;
       word-wrap: normal;
     }
-    
+
     // screens below breakpoint
     padding: $pre-padding;
     font-size: emCalc(13px);
@@ -808,13 +816,13 @@ table.tableblock #preamble > .sectionbody > [class="paragraph"]:first-of-type p 
 }
 
 .listingblock.terminal pre .command:before {
-  content: attr(data-prompt); 
+  content: attr(data-prompt);
   padding-right: 0.5em;
   color: #999;
 }
 
 .listingblock.terminal pre .command:not([data-prompt]):before {
-  content: "$"; 
+  content: "$";
 }
 
 // overrides for Pygments default styles
@@ -1416,7 +1424,7 @@ sup.footnoteref {
   .big {
     font-size: larger;
   }
-  
+
   .small {
     font-size: smaller;
   }
@@ -1428,13 +1436,13 @@ sup.footnoteref {
   }
 
   // colors must be quoted or else they may get converted to hex in compression output mode
-  @each $color in ('aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow') {
+  @each $color in (aqua, black, blue, fuchsia, gray, green, lime, maroon, navy, olive, purple, red, silver, teal, white, yellow) {
     .#{$color} {
-      color: scale-color(string-to-color($color), $lightness: $rainbow-lightness);
+      color: scale-color($color, $lightness: $rainbow-lightness);
     }
-  
+
     .#{$color}-background {
-      background-color: scale-color(string-to-color($color), $lightness: $rainbow-bg-lightness);
+      background-color: scale-color($color, $lightness: $rainbow-bg-lightness);
     }
   }
 

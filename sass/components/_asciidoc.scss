@@ -10,10 +10,10 @@ object, svg {
 .stretch {
   width: 100%;
 }
-@import "foundation-grid";
 @import "foundation-type";
 @import "foundation-panels";
 @import "foundation-tables";
+$column-gutter: em-calc(30) !default;
 $old-include-html-global-classes: $include-html-global-classes;
 $include-html-global-classes: false;
 $inline-list-bottom-margin: $paragraph-margin-bottom / 2 !default;
@@ -255,8 +255,8 @@ b.button:after {
   margin: 2em auto 0;
   max-width: 62.5em;
   position: relative;
-  padding-left: em-calc(30) / 2;
-  padding-right: em-calc(30) / 2;
+  padding-left: ($column-gutter / 2);
+  padding-right: ($column-gutter / 2);
 }
 
 #content {

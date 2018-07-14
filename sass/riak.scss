@@ -28,8 +28,8 @@ body {
 .listingblock {
   & pre {
     background: $pre-bg;
-    @include single-box-shadow(#AEB9B6, 0, 1px, 4px, $inset:inset);
-    @include radius(5px);
+    box-shadow: inset 0 1px 4px #AEB9B6;
+    border-radius: 5px;
     //font-size: 80%;
   }
 }
@@ -50,7 +50,7 @@ p > em {
     background-image: image-url('riak/info-bg.jpg', false, false);
     border-collapse: separate;
     border-spacing: 0;
-    @include radius(5px);
+    border-radius: 5px;
     border: 1px solid #9EC6DF;
     td.icon {
       padding: 15px;
@@ -80,7 +80,7 @@ p > em {
 
 .sidebarblock {
   background-image: image-url('riak/sidebar-bg.jpg', false, false);
-  @include radius(5px);
+  border-radius: 5px;
   & > .content {
     & > .title {
       color: #f1f1f1;
@@ -114,8 +114,8 @@ p > em {
 }
 
 table.tableblock.grid-all {
-  @include radius(0);
-  @include single-box-shadow(#999, 0, 1px, 3px);
+  border-radius: 0;
+  box-shadow: 0 1px 3px #999999;
 }
 
 #footer {

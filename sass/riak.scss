@@ -6,12 +6,12 @@
 @import "components/awesome-icons";
 
 body {
-  background-image: image-url('riak/body-bg.jpg', false, false);
+  background-image: url('riak/body-bg.jpg');
 }
 
 //@media #{$medium} {
 //  #toc.toc2 {
-//    background-image: image-url('riak/body-bg.jpg', false, false);
+//    background-image: url('riak/body-bg.jpg');
 //  }
 //}
 
@@ -47,7 +47,7 @@ p > em {
 .admonitionblock {
   & > table {
     width: 100%;
-    background-image: image-url('riak/info-bg.jpg', false, false);
+    background-image: url('riak/info-bg.jpg');
     border-collapse: separate;
     border-spacing: 0;
     border-radius: 5px;
@@ -70,7 +70,7 @@ p > em {
 
 .admonitionblock .literalblock > .content > pre,
 .admonitionblock .listingblock > .content > pre {
-  background-image: image-url('riak/info-bg.jpg', false, false);
+  background-image: url('riak/info-bg.jpg');
 }
 
 .exampleblock > .content {
@@ -79,7 +79,7 @@ p > em {
 }
 
 .sidebarblock {
-  background-image: image-url('riak/sidebar-bg.jpg', false, false);
+  background-image: url('riak/sidebar-bg.jpg');
   border-radius: 5px;
   & > .content {
     & > .title {
@@ -119,7 +119,7 @@ table.tableblock.grid-all {
 }
 
 #footer {
-  background-image: image-url('riak/footer-bg.jpg', false, false);
+  background-image: url('riak/footer-bg.jpg');
   padding: 25px 0;
 }
 

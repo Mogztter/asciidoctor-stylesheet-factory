@@ -31,7 +31,7 @@ h2 {
 #content ul {
   list-style-type: none;
   li {
-    background: image-url('github/li-chevron.png') 0 .4em no-repeat;
+    background: url('github/li-chevron.png') 0 .4em no-repeat;
     padding-left: .7em;
   }
 }
@@ -65,7 +65,7 @@ h2 {
 
 .quoteblock {
   blockquote {
-    background: image-url('github/blockquote-arrow.png') 0 2px no-repeat;
+    background: url('github/blockquote-arrow.png') 0 2px no-repeat;
     padding-left: 1em;
   }
 }

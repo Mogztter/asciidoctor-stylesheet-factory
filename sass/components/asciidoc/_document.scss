@@ -1,0 +1,132 @@
+$footer-bg: $body-font-color !default;
+$footer-font-color: invert($body-font-color) !default;
+
+body {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  tab-size: 4;
+}
+
+#header,
+#footer {
+  margin: 2em auto 0;
+  max-width: 62.5em;
+  position: relative;
+  padding-left: ($column-gutter / 2);
+  padding-right: ($column-gutter / 2);
+}
+
+#header {
+  & > h1:first-child {
+    color: $title-font-color;
+    @if $title-font-weight and $title-font-weight != $header-font-weight {
+      font-weight: $title-font-weight;
+    }
+    margin-top: 2.25rem;
+    margin-bottom: 0;
+
+    & + #toc {
+      margin-top: 8px; // dependent on $header-line-height
+      border-top: $hr-border-width $hr-border-style $hr-border-color;
+    }
+  }
+
+  // when neither details or toc are there to draw line
+  & > h1:only-child,
+  body.toc2 & > h1:nth-last-child(2) {
+    // FIXME shouldn't this be sect-divider?
+    border-bottom: $hr-border-width $hr-border-style $hr-border-color;
+    padding-bottom: 8px; // dependent on $header-line-height
+  }
+
+  .details {
+    border-bottom: $hr-border-width $hr-border-style $hr-border-color;
+    line-height: 1.45;
+    padding-top: 0.25em;
+    padding-bottom: 0.25em;
+    padding-left: 0.25em;
+    // FIXME use $aside-font-color
+    color: $blockquote-cite-font-color;
+    // flex collapses all space between items
+    display: flex;
+    flex-flow: row wrap;
+
+    span:first-child {
+      //margin-left: -0.25em;
+      margin-left: -0.125em;
+    }
+
+    span.email a {
+      // FIXME darken the $aside-font-color
+      color: $blockquote-font-color;
+    }
+
+    br {
+      display: none;
+      & + span:before {
+        content: "\00a0\2013\00a0";
+      }
+      & + span.author:before {
+        // we can't prevent wrap before comma, so use middot instead
+        //content: ",\00a0";
+        //content: "\00a0\00b7\00a0";
+        content: "\00a0\22c5\00a0";
+        // FIXME darken the $aside-font-color
+        color: $blockquote-font-color;
+      }
+      & + span#revremark:before {
+        content: "\00a0|\00a0";
+        // FIXME darken the $aside-font-color
+        //color: $blockquote-font-color;
+      }
+    }
+  }
+
+  #revnumber {
+    text-transform: capitalize;
+  }
+  #revnumber:after {
+    content: "\00a0";
+  }
+}
+
+@media #{$medium} {
+  body.toc2 {
+    padding-left: 22em;
+    padding-right: 0;
+  }
+
+  #toc.toc2 {
+    width: 20em;
+
+    #toctitle {
+      font-size: 1.375em;
+    }
+
+    & > ul {
+      font-size: 0.95em;
+    }
+
+    ul ul {
+      padding-left: $list-nested-margin;
+    }
+  }
+
+  body.toc2.toc-right {
+    padding-left: 0;
+    padding-right: 22em;
+  }
+}
+
+#footer {
+  max-width: 100%;
+  //margin-top: $panel-margin-bottom * 2;
+  background-color: $footer-bg;
+  padding: $panel-padding;
+}
+
+#footer-text {
+  color: $footer-font-color;
+  line-height: $paragraph-line-height * 0.9;
+}
+

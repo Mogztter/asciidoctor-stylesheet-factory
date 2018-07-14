@@ -1,0 +1,76 @@
+@import "defaults";
+
+// Common
+
+$font-family: "Lato", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+
+// Body
+
+$em-base: 16px;
+$global-radius: 0;
+$body-font-family: $font-family;
+$body-font-color: #222;
+$body-bg: #222;
+$primary-color: white;
+
+// Headings
+
+$title-font-color: white;
+$header-font-color: white;
+$header-font-family: $font-family;
+$header-top-margin: 1em;
+$sect-divider-size: 1px;
+$sect-divider-style: solid;
+$sect-divider-color: #444;
+
+// Panels
+
+$panel-bg: #303030;
+
+// Paragraphs
+
+// Code
+
+$code-color: #e83e8c;
+$code-font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+$pre-font-size: .9em;
+$pre-font-family: monospace, serif;
+$pre-bg: #303030;
+$pre-line-height: 1.4;
+$pre-border-size: 1px;
+$pre-border-color: #444;
+$pre-border-style: solid;
+$pre-font-color: #e83e8c;
+$pre-padding: .8em .8em .65em .8em;
+
+// Links
+
+$anchor-font-color: #00bc8c;
+$anchor-font-color-hover: #007053;
+
+// Lists
+
+$list-side-margin: emCalc(24px);
+$definition-list-header-margin-bottom: emCalc(5px);
+$definition-list-margin-bottom: emCalc(20px);
+
+// Blockquotes
+
+// Tables
+
+$table-border-size: 0;
+$table-head-font-color: white;
+$table-bg: rgba(0, 0, 0, 0.075);
+$table-even-row-bg: rgba(0, 0, 0, 0.075);
+$table-head-bg: rgba(0, 0, 0, 0.075);
+$table-head-font-size: inherit;
+$table-row-font-size: inherit;
+$table-line-height: 1.4;
+$table-row-font-color: white;
+
+// Footer
+
+$footer-bg: #303030;
+$footer-font-color: white;
+

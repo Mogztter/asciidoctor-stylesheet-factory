@@ -89,7 +89,7 @@ body {
     border: $code-border-size $code-border-style $code-border-color;
   }
   @if $code-bg-color != inherit or $code-border-size != 0 {
-    @include radius;
+    border-radius: $global-radius;
   }
   //text-shadow: none;
   line-height: $code-line-height;
@@ -157,8 +157,8 @@ kbd {
   line-height: 1.45;
   background-color: #f7f7f7;
   border: 1px solid #ccc;
-  @include radius(3px);
-  @include box-shadow(0 1px 0 rgba(0,0,0,0.2), 0 0 0 0.1em white inset);
+  border-radius: 3px;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.2), 0 0 0 0.1em white inset;
   margin: 0 0.15em;
   padding: 0.2em 0.5em;
   vertical-align: middle;
@@ -296,11 +296,7 @@ b.button:after {
     // FIXME use $aside-font-color
     color: $blockquote-cite-font-color;
     // flex collapses all space between items
-    display: -ms-flexbox;
-    display: -webkit-flex;
     display: flex;
-    -ms-flex-flow: row wrap;
-    -webkit-flex-flow: row wrap;
     flex-flow: row wrap;
 
     span:first-child {
@@ -489,7 +485,7 @@ b.button:after {
 #content #toc {
   @include panel($panel-bg, $panel-padding);
   //border-color: $panel-border-color;
-  @include radius;
+  border-radius: $global-radius;
 }
 
 #footer {
@@ -690,7 +686,7 @@ table.tableblock #preamble > .sectionbody > [class="paragraph"]:first-of-type p 
 .exampleblock > .content {
   // FIXME add variable for $example-bg
   @include panel($body-bg, $panel-padding);
-  @include radius;
+  border-radius: $global-radius;
   //& > :last-child > :last-child,
   //// argh, review!
   //.olist > ol > li:last-child > :last-child,
@@ -702,7 +698,7 @@ table.tableblock #preamble > .sectionbody > [class="paragraph"]:first-of-type p 
 
 .sidebarblock {
   @include panel(darken($panel-bg, 2%), $panel-padding);
-  @include radius;
+  border-radius: $global-radius;
 
   & > .content {
     & > .title {
@@ -740,7 +736,7 @@ table.tableblock #preamble > .sectionbody > [class="paragraph"]:first-of-type p 
     border: $pre-border-size $pre-border-style $pre-border-color;
   }
   // FIXME make border radius on listing blocks configurable!
-  @include radius;
+    border-radius: $global-radius;
   //overflow-wrap: break-word;
   word-wrap: break-word;
   // set overflow-x just in case content refuses to break
@@ -1219,11 +1215,7 @@ ul.checklist li > p:first-child > input[type="checkbox"]:first-child {
 }
 
 ul.inline {
-  display: -ms-flexbox;
-  display: -webkit-box;
   display: flex;
-  -ms-flex-flow: row wrap;
-  -webkit-flex-flow: row wrap;
   flex-flow: row wrap;
   list-style: none;
   margin: 0 0 $inline-list-bottom-margin (-$inline-list-item-spacing);
@@ -1310,9 +1302,6 @@ td.hdlist1 {
   line-height: 0;
   display: inline-block;
   border: $thumb-border-style $thumb-border-width $thumb-border-color;
-  @if $experimental {
-    -webkit-box-shadow: $thumb-box-shadow;
-  }
   box-shadow: $thumb-box-shadow;
 }
 

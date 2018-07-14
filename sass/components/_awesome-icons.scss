@@ -13,7 +13,7 @@ span.icon > .fa {
     text-shadow: $icon-text-shadow;
     cursor: default;
   }
-  
+
   .icon-note:before {
     // @extend .fa-thumb-tack;
     //content: "\f08d";
@@ -25,7 +25,7 @@ span.icon > .fa {
     //color: $primary-color;
     color: scale-color($primary-color, $lightness: $rainbow-lightness);
   }
-  
+
   .icon-tip:before {
     // @extend .fa-info-circle;
     //content: "\f05a";
@@ -38,7 +38,7 @@ span.icon > .fa {
     text-shadow: 1px 1px 2px rgba(155, 155, 0, .8);
     color: #111;
   }
-  
+
   .icon-warning:before {
     // @extend .fa-exclamation-triangle;
     content: "\f071";
@@ -50,7 +50,7 @@ span.icon > .fa {
     content: "\f06d";
     color: scale-color(orangered, $lightness: $rainbow-lightness);
   }
-  
+
   .icon-important:before {
     // @extend .icon-exclamation-circle;
     content: "\f06a";
@@ -64,7 +64,7 @@ span.icon > .fa {
   display: inline-block;
   color: #fff !important;
   background-color: $body-font-color;
-  @include radius(100px);
+  border-radius: 100px;
   text-align: center;
   font-size: 0.75em;
   //width: 1.5em;

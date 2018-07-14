@@ -1,20 +1,4 @@
 //
-// Global Foundation Mixins
-//
-
-$experimental: true !default;
-
-// We use this to control border radius.
-@mixin radius($radius:$global-radius) {
-  @if $radius {
-    @if $experimental {
-      -webkit-border-radius: $radius;
-    }
-    border-radius: $radius;
-  }
-}
-
-//
 // Foundation Variables
 //
 

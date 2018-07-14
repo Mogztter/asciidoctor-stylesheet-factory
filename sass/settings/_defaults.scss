@@ -73,13 +73,6 @@ $thumb-border-width: 4px !default;
 $thumb-border-color: #fff !default;
 $thumb-box-shadow: 0 0 0 1px #ddd !default;
 
-// exclude unnecessary styles
-
-$include-html-panel-classes: false;
-$include-html-media-classes: false;
-$include-html-inline-list-classes: false;
-$include-print-styles: false;
-
 // cut down on number of vendor prefixes used
 $experimental-support-for-khtml: false;
 $experimental-support-for-microsoft: false;

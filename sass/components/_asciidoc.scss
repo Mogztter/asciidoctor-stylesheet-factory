@@ -240,7 +240,6 @@ b.button:after {
 #content,
 #footnotes,
 #footer {
-  width: 100%;
   margin: 2em auto 0;
   max-width: 62.5em;
   position: relative;
@@ -392,7 +391,7 @@ b.button:after {
   }
 
   body.toc2 {
-    padding-left: 15em;
+    padding-left: 17em;
     padding-right: 0;
   }
 
@@ -434,7 +433,7 @@ b.button:after {
 
   body.toc2.toc-right {
     padding-left: 0;
-    padding-right: 15em;
+    padding-right: 17em;
 
     #toc.toc2 {
       border-right-width: 0;
@@ -447,7 +446,7 @@ b.button:after {
 
 @media #{$medium} {
   body.toc2 {
-    padding-left: 20em;
+    padding-left: 22em;
     padding-right: 0;
   }
 
@@ -469,7 +468,7 @@ b.button:after {
 
   body.toc2.toc-right {
     padding-left: 0;
-    padding-right: 20em;
+    padding-right: 22em;
   }
 }
 

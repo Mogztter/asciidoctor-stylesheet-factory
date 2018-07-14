@@ -14,11 +14,8 @@ object, svg {
 @import "foundation-panels";
 @import "foundation-tables";
 $column-gutter: em-calc(30) !default;
-$old-include-html-global-classes: $include-html-global-classes;
-$include-html-global-classes: false;
 $inline-list-bottom-margin: $paragraph-margin-bottom / 2 !default;
 $inline-list-item-spacing: $paragraph-margin-bottom !default;
-$include-html-global-classes: $old-include-html-global-classes;
 
 // controls whether built-in AsciiDoc role classes are generated
 $include-asciidoc-role-classes: true !default;
@@ -490,7 +487,7 @@ b.button:after {
 
 // toc within content
 #content #toc {
-  @include panel($panel-bg, $panel-padding, false);
+  @include panel($panel-bg, $panel-padding);
   //border-color: $panel-border-color;
   @include radius;
 }
@@ -692,7 +689,7 @@ table.tableblock #preamble > .sectionbody > [class="paragraph"]:first-of-type p 
 
 .exampleblock > .content {
   // FIXME add variable for $example-bg
-  @include panel($body-bg, $panel-padding, false);
+  @include panel($body-bg, $panel-padding);
   @include radius;
   //& > :last-child > :last-child,
   //// argh, review!
@@ -704,7 +701,7 @@ table.tableblock #preamble > .sectionbody > [class="paragraph"]:first-of-type p 
 }
 
 .sidebarblock {
-  @include panel(darken($panel-bg, 2%), $panel-padding, false);
+  @include panel(darken($panel-bg, 2%), $panel-padding);
   @include radius;
 
   & > .content {

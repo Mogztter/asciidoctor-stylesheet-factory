@@ -65,8 +65,9 @@ dl dt {
 }
 
 .admonitionblock > table {
-  border: 0 solid $panel-border-color;
-  border-width: 1px 0;
+  border: 1px solid $panel-border-color;
+  border-left: none;
+  border-right: none;
   background-color: $pale-grey;
 
   td.icon {

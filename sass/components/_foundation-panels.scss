@@ -15,19 +15,12 @@ $panel-border-color: darken($panel-bg, $panel-function-factor) !default;
 $panel-margin-bottom: em-calc(20) !default;
 $panel-padding: em-calc(20) !default;
 
-// We use these to set default font colors
-$panel-font-color: #333 !default;
-$panel-font-color-alt: #fff !default;
-
-$panel-header-adjust: true !default;
-$callout-panel-link-color: #fff !default;
-
 //
 // Panel Mixins
 //
 
 // We use this mixin to create panels.
-@mixin panel($bg:$panel-bg, $padding:$panel-padding, $adjust:$panel-header-adjust) {
+@mixin panel($bg:$panel-bg, $padding:$panel-padding) {
 
   @if $bg {
     $bg-lightness: lightness($bg);
@@ -43,18 +36,5 @@ $callout-panel-link-color: #fff !default;
     // Respect the padding, fool.
     &>:first-child { margin-top: 0; }
     &>:last-child { margin-bottom: 0; }
-
-    @if $adjust {
-      // We set the font color based on the darkness of the bg.
-      @if $bg-lightness >= 50% and $bg == blue { h1,h2,h3,h4,h5,h6,p { color: $panel-font-color-alt; } }
-      @else if $bg-lightness >= 50%            { h1,h2,h3,h4,h5,h6,p { color: $panel-font-color; } }
-      @else                                    { h1,h2,h3,h4,h5,h6,p { color: $panel-font-color-alt; } }
-
-      // reset header line-heights for panels
-      h1,h2,h3,h4,h5,h6 {
-        line-height: 1; margin-bottom: em-calc(20) / 2;
-        &.subheader { line-height: 1.4; }
-      }
-    }
   }
 }

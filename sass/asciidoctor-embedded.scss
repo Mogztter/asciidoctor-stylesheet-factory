@@ -1,0 +1,10 @@
+@import "settings/asciidoctor";
+@import "components/asciidoc-embedded";
+@import "components/awesome-icons";
+
+.literalblock,
+.listingblock {
+  & > .content > pre {
+    border-radius: 0;
+  }
+}

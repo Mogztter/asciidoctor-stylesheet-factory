@@ -1,0 +1,84 @@
+@import "settings/darkly";
+@import "components/asciidoc";
+@import "components/awesome-icons";
+@import "components/print";
+
+body {
+  background-color: $body-bg;
+  color: $primary-color;
+}
+
+#header .details {
+  font-family: $body-font-family;
+}
+
+#content {
+  font-family: $body-font-family;
+}
+
+#footer {
+  font-family: $body-font-family;
+}
+
+#toc {
+  background-color: $panel-bg;
+  padding: 1rem 1rem;
+}
+
+.admonitionblock {
+
+  &.warning > table {
+    background-color: #F39C12;
+  }
+  &.note > table {
+    background-color: #3498DB;
+  }
+  &.tip > table {
+    background-color: #00bc8c;
+  }
+  &.caution > table {
+    background-color: #E74C3C;
+  }
+  &.important > table {
+    background-color: #E74C3C;
+  }
+  & > table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 5px;
+    border: none;
+    td.content {
+      border: 0;
+      padding: 15px;
+      code {
+        color: white;
+      }
+    }
+    td.icon {
+      & > .icon-tip:before, .icon-warning:before, .icon-important:before, .icon-caution:before, .icon-note:before {
+        text-shadow: 1px 1px 2px black;
+        color: white;
+      }
+    }
+  }
+}
+
+td.content > a {
+  font-weight: 700;
+  color: #fff;
+  text-decoration: underline;
+}
+
+table.frame-all {
+  border-collapse: collapse;
+}
+
+table.grid-all > thead > tr > .tableblock {
+  border-bottom: 2px solid #444;
+  border-top: 1px solid #444;
+}
+
+table.grid-all > tbody > tr > .tableblock {
+  border-top: 1px solid #444;
+}

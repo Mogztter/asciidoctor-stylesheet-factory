@@ -2,7 +2,7 @@ sudo: false
 dist: trusty
 
 script:
-- "build-stylesheet.sh"
+- "./build-stylesheet.sh"
 
 language: node_js
 

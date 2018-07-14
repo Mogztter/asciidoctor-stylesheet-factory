@@ -6,10 +6,10 @@ if [ ! -z $1 ]; then
   STYLESHEET_NAME=$1
 fi
 
-bundle exec compass compile -s compact
-LINES=`wc -l stylesheets/$STYLESHEET_NAME.css | cut -d" " -f1`
+npm run build
+LINES=`wc -l css/$STYLESHEET_NAME.css | cut -d" " -f1`
 echo '/* Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */' > $STYLESHEET_NAME.css
-cat stylesheets/$STYLESHEET_NAME.css | \
+cat css/$STYLESHEET_NAME.css | \
   sed 's/ *\/\*\+!\? [^*]\+\($\| \*\/\)//g' | \
   sed 's/^\/\*\* .* \*\/$//' | \
   sed '/^\(*\/\|\) *$/d' | \
@@ -28,23 +28,3 @@ cat stylesheets/$STYLESHEET_NAME.css | \
   sed '/^ul\.no-bullet { list-style: none; }$/d' | \
   sed '/\(meta\.\|\.vcard\|\.vevent\|#map_canvas\|"search"\|\[hidden\]\)/d' | \
   grep -v 'font-awesome' >> $STYLESHEET_NAME.css
-
-# see https://www.npmjs.org/package/cssshrink (using 0.0.5)
-# must run first: npm install cssshrink
-./node_modules/.bin/cssshrink $STYLESHEET_NAME.css | \
-  sed '1i\
-/* Uncomment @import statement when using as custom stylesheet */\
-/*@import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700";*/' | \
-  sed '1i\
-/* Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */' | \
-  sed 's/\(Open Sans\|DejaVu Sans\|Noto Serif\|DejaVu Serif\|Droid Sans Mono\|DejaVu Sans Mono\|Ubuntu Mono\|Liberation Mono\|Varela Round\)/"\1"/g' | \
-  sed 's/background:transparent/background:none/g' | \
-  sed 's/background-color:\([^};]\+\)/background:\1/g' | \
-  sed 's/border:none/border:0/g' | \
-  # changing to font-weight:bold allows us to map the font weight 600 as bold
-  sed 's/font-weight:700/font-weight:bold/g' | \
-  # use double colon for before/after pseudo-elements (see https://www.w3.org/TR/selectors/#pseudo-element-syntax)
-  sed 's/\([^:]\):\(before\|after\)/\1::\2/g' | \
-  # drop the fourth value if it matches the second
-  sed 's/\([a-z-]\+\):\([0-9.empx-]\+\) \([0-9.empx-]\+\) \([0-9.empx-]\+\) \3/\1:\2 \3 \4/g' | \
-  ruby -e 'puts STDIN.read.gsub(/}(?!})/, %(}\n)).chomp' - > $STYLESHEET_NAME.min.css

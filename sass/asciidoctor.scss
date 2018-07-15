@@ -41,4 +41,173 @@ p {
   box-shadow: 0 1px 4px $panel-border-color;
 }
 
+$hamburger-padding-x: 0 !default;
+$hamburger-padding-y: 0 !default;
+$hamburger-layer-width: 40px !default;
+$hamburger-layer-height: 4px !default;
+$hamburger-layer-spacing: 6px !default;
+$hamburger-layer-color: white !default;
+$hamburger-layer-border-radius: 4px !default;
+$hamburger-hover-opacity: 0.9 !default;
+$hamburger-hover-transition-duration: 0.15s !default;
+$hamburger-hover-transition-timing-function: linear !default;
+$hamburger-hover-use-filter: false !default;
+$hamburger-hover-filter: opacity(50%) !default;
+
+#toctoggle {
+  position: fixed;
+  right: 1em;
+  bottom: 1em;
+  z-index: 1;
+  button:focus {
+    outline: none;
+    border: none;
+  }
+  .hamburger {
+    height: 60px;
+    width: 60px;
+    background-color: #272727;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  }
+  .hamburger--accessible {
+    display: inline-block;
+  }
+  .hamburger--accessible .hamburger-box {
+    display: none;
+  }
+  .hamburger-label {
+    font-family: $header-font-family;
+    font-weight: 600;
+    display: inline-block;
+    vertical-align: middle;
+    text-transform: uppercase;
+    color: $hamburger-layer-color;
+  }
+}
+
+.hamburger--3dy {
+  .hamburger-box {
+    perspective: $hamburger-layer-width * 2;
+  }
+
+  .hamburger-inner {
+    transition: transform 0.15s cubic-bezier(0.645, 0.045, 0.355, 1),
+    background-color 0s 0.1s cubic-bezier(0.645, 0.045, 0.355, 1);
+
+    &::before,
+    &::after {
+      transition: transform 0s 0.1s cubic-bezier(0.645, 0.045, 0.355, 1);
+    }
+  }
+
+  &.is-active {
+    .hamburger-inner {
+      background-color: transparent;
+      transform: rotateX(-180deg);
+
+      &::before {
+        transform: translate3d(0, $hamburger-layer-height + $hamburger-layer-spacing, 0) rotate(45deg);
+      }
+
+      &::after {
+        transform: translate3d(0, ($hamburger-layer-height + $hamburger-layer-spacing) * -1, 0) rotate(-45deg);
+      }
+    }
+  }
+}
+
+.hamburger {
+  padding: $hamburger-padding-y $hamburger-padding-x;
+  display: inline-block;
+  cursor: pointer;
+
+  transition-property: opacity, filter;
+  transition-duration: $hamburger-hover-transition-duration;
+  transition-timing-function: $hamburger-hover-transition-timing-function;
+
+  // Normalize (<button>)
+  font: inherit;
+  color: inherit;
+  text-transform: none;
+  background-color: transparent;
+  border: 0;
+  margin: 0;
+  overflow: visible;
+
+  &:hover {
+    @if $hamburger-hover-use-filter == true {
+      filter: $hamburger-hover-filter;
+    } @else {
+      opacity: $hamburger-hover-opacity;
+    }
+  }
+}
+
+.hamburger-box {
+  width: $hamburger-layer-width;
+  height: $hamburger-layer-height * 3 + $hamburger-layer-spacing * 2;
+  display: inline-block;
+  position: relative;
+}
+
+.hamburger-inner {
+  display: block;
+  top: 50%;
+  margin-top: $hamburger-layer-height / -2;
+
+  &,
+  &::before,
+  &::after {
+    width: $hamburger-layer-width;
+    height: $hamburger-layer-height;
+    background-color: $hamburger-layer-color;
+    border-radius: $hamburger-layer-border-radius;
+    position: absolute;
+    transition-property: transform;
+    transition-duration: 0.15s;
+    transition-timing-function: ease;
+  }
+
+  &::before,
+  &::after {
+    content: "";
+    display: block;
+  }
+
+  &::before {
+    top: ($hamburger-layer-spacing + $hamburger-layer-height) * -1;
+  }
+
+  &::after {
+    bottom: ($hamburger-layer-spacing + $hamburger-layer-height) * -1;
+  }
+}
+
+#toc.toc2 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  background-color: #f5f5f5;
+  opacity: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transform: translate(-120px, 0);
+  transition-property: all;
+  transition-duration: 0.15s;
+  transition-timing-function: linear;
+  padding-top: 75px;
+  padding-left: 1.5em;
+  padding-right: 1.5em;
+
+  &.is-active {
+    opacity: 1;
+    transform: translate(0, 0);
+    pointer-events: all;
+  }
+}
+
 @import "components/print";

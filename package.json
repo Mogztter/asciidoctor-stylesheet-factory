@@ -7,8 +7,8 @@
     "Guillaume Grossetie (https://github.com/mogztter)"
   ],
   "description": "Modern CSS to style AsciiDoc HTML5 output",
-  "main": "asciidoctor.sass",
-  "style": "asciidoctor-stylesheets/css/asciidoctor.min.css",
+  "main": "sass/asciidoctor.scss",
+  "style": "css/asciidoctor.min.css",
   "repository": {
     "type": "git",
     "url": "https://github.com/mogztter/asciidoctor-stylesheets.git"
@@ -17,7 +17,6 @@
   "keywords": [
     "css",
     "sass",
-    "flexbox",
     "responsive",
     "asciidoctor",
     "stylesheets"
@@ -45,9 +44,6 @@
   },
   "files": [
     "css",
-    "sass",
-    "asciidoctor.sass",
-    "LICENSE",
-    "README.adoc"
+    "sass"
   ]
 }

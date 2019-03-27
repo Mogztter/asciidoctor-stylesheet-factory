@@ -62,7 +62,8 @@ $subheader-text-rendering: $header-text-rendering !default;
   }
 }
 
-*:not(pre) > code {
+// :not([class^=L]) is for prettify; could also use :not(li)
+:not(pre):not([class^=L]) > code {
   font-size: $code-font-size;
   font-style: normal !important;
   letter-spacing: 0;
@@ -86,6 +87,9 @@ $subheader-text-rendering: $header-text-rendering !default;
   }
   //overflow-wrap: break-word;
   word-wrap: break-word;
+}
+
+:not(pre) > code {
   &.nobreak {
     //overflow-wrap: normal;
     word-wrap: normal;
@@ -95,28 +99,32 @@ $subheader-text-rendering: $header-text-rendering !default;
   }
 }
 
-pre, pre > code {
-  line-height: $pre-line-height;
-  // this overrides what was set on code
+pre {
   color: $pre-font-color;
   font-family: $pre-font-family;
-  font-weight: normal;
+  //font-weight: $pre-font-weight;
+  line-height: $pre-line-height;
   @if $code-text-rendering != inherit {
     text-rendering: $code-text-rendering;
   }
+  // NOTE syntax highlighters may deeply nest both code and pre tags
+  code, pre {
+    // QUESTION what about background?
+    color: inherit;
+    font-size: inherit;
+    line-height: inherit;
+  }
+  > code {
+    display: block;
+  }
 }
 
-// if we need to trump the code settings
-//pre > code {
-//  font-size: 1em;
-//  white-space: inherit;
-//  color: $pre-font-color;
-//  font-family: $pre-font-family;
-//  padding: 0;
-//  background: none;
-//  font-weight: normal;
-//  border: 0;
-//}
+pre.nowrap,
+pre.nowrap pre {
+  white-space: pre;
+  //overflow-wrap: normal;
+  word-wrap: normal;
+}
 
 em em {
   font-style: normal;
@@ -225,7 +233,6 @@ b.button:after {
   //}
 }
 
-
 #content {
   margin-top: 1.25em;
 }
@@ -296,13 +303,13 @@ b.button:after {
   }
 
   body.toc2 {
-    padding-left: 17em;
+    padding-left: 15em;
     padding-right: 0;
   }
 
   #toc.toc2 {
     margin-top: 0 !important;
-    background-color: $panel-bg;
+    background: $panel-bg;
     position: fixed;
     width: 15em;
     left: 0;
@@ -338,7 +345,7 @@ b.button:after {
 
   body.toc2.toc-right {
     padding-left: 0;
-    padding-right: 17em;
+    padding-right: 15em;
 
     #toc.toc2 {
       border-right-width: 0;
@@ -356,6 +363,10 @@ b.button:after {
   position: relative;
   padding-left: ($column-gutter / 2);
   padding-right: ($column-gutter / 2);
+}
+
+#content {
+  margin-top: 1.25em;
 }
 
 // toc within content
@@ -427,6 +438,12 @@ b.button:after {
       color: darken($header-font-color, 5%);
     }
   }
+}
+
+details>summary:first-of-type {
+  display: list-item;
+  cursor: pointer;
+  margin-bottom: $panel-margin-bottom;
 }
 
 // AsciiDoc block styles
@@ -509,7 +526,7 @@ table.tableblock #preamble > .sectionbody > [class="paragraph"]:first-of-type p 
 .admonitionblock > table {
   border-collapse: separate;
   border: 0;
-  background: none;
+  background: none; // FIXME this wouldn't be required if a background was set on table.tableblock and not table
   width: 100%;
   td.icon {
     text-align: center;
@@ -589,55 +606,25 @@ table.tableblock #preamble > .sectionbody > [class="paragraph"]:first-of-type p 
   }
 }
 
-// FIXME make this situation simpler
-// we're trying to accomodate highlight themes that have background colors
-// if "highlight" is in first position, then a source highlighter is not in use
 .literalblock pre,
-.listingblock pre:not(.highlight),
-.listingblock pre[class="highlight"],
-.listingblock pre[class^="highlight "],
-.listingblock pre.CodeRay,
-.listingblock pre.prettyprint {
-  background: $pre-bg;
-
-  .sidebarblock & {
-    // FIXME make me a variable
-    // FIXME what about inline code?
-    //background: #ededef;
-    background: #f2f1f1;
+.listingblock > .content > pre {
+  @if $pre-border-size {
+    border: $pre-border-size $pre-border-style $pre-border-color;
   }
-}
-
-.literalblock,
-.listingblock {
-  // use pre[class] so we win over pre.<name> styles
-  pre, pre[class] {
-    @if $pre-border-size {
-      border: $pre-border-size $pre-border-style $pre-border-color;
-    }
-    // FIXME make border radius on listing blocks configurable!
-    border-radius: $global-radius;
-    //overflow-wrap: break-word;
-    word-wrap: break-word;
-
-    &.nowrap {
-      overflow-x: auto;
-      white-space: pre;
-      //overflow-wrap: normal;
-      word-wrap: normal;
-    }
-
-    // screens below breakpoint
-    padding: $pre-padding;
-    font-size: emCalc(13px);
-
-    @media #{$small} {
-      font-size: emCalc(14.5px);
-    }
-
-    @media #{$medium} {
-      font-size: emCalc(16px);
-    }
+  // FIXME make border radius on listing blocks configurable!
+  border-radius: $global-radius;
+  //overflow-wrap: break-word;
+  word-wrap: break-word;
+  // set overflow-x just in case content refuses to break
+  overflow-x: auto;
+  // screens below breakpoint
+  padding: $pre-padding;
+  font-size: emCalc(13px);
+  @media #{$small} {
+    font-size: emCalc(14.5px);
+  }
+  @media #{$medium} {
+    font-size: emCalc(16px);
   }
 }
 
@@ -647,20 +634,11 @@ table.tableblock #preamble > .sectionbody > [class="paragraph"]:first-of-type p 
   background-color: $pre-font-color;
 }
 
-// highlight.js themes put bg on <code>, so shift padding
-.listingblock pre.highlightjs {
-  padding: 0;
-  & > code {
-    padding: $pre-padding;
-    // FIXME make border radius on listing blocks configurable!
-    border-radius: $global-radius;
-  }
-}
-
-@if not $pre-border-size {
-  .listingblock pre.prettyprint {
-    border-width: 0;
-  }
+// NOTE if highlight class is absent or in first position, we know source highlighter is not active
+.listingblock > .content > pre:not(.highlight),
+.listingblock > .content > pre[class="highlight"],
+.listingblock > .content > pre[class^="highlight "] {
+  background: $pre-bg;
 }
 
 .listingblock > .content {
@@ -678,7 +656,8 @@ table.tableblock #preamble > .sectionbody > [class="paragraph"]:first-of-type p 
   right: 0.5rem; // 0.67em
   line-height: 1;
   text-transform: uppercase;
-  color: #999;
+  color: inherit;
+  opacity: 0.5;
 }
 
 .listingblock:hover code[data-lang]:before {
@@ -688,51 +667,98 @@ table.tableblock #preamble > .sectionbody > [class="paragraph"]:first-of-type p 
 .listingblock.terminal pre .command:before {
   content: attr(data-prompt);
   padding-right: 0.5em;
-  color: #999;
+  color: inherit;
+  opacity: 0.5;
 }
 
 .listingblock.terminal pre .command:not([data-prompt]):before {
   content: "$";
 }
 
-// overrides for Pygments default styles
-table.pyhltable {
+// highlight.js themes put bg on <code>, so shift padding
+.listingblock pre.highlightjs {
+  padding: 0;
+  & > code {
+    padding: $pre-padding;
+    // FIXME make border radius on listing blocks configurable!
+    border-radius: $global-radius;
+  }
+}
+
+// overrides for built-in prettify styles
+@if not $pre-border-size {
+  .listingblock pre.prettyprint {
+    border-width: 0;
+  }
+}
+
+// NOTE set the lowest priority background color in case prettify style doesn't provide one
+.prettyprint {
+  background: $pre-bg;
+}
+
+pre.prettyprint .linenums {
+  line-height: $pre-line-height;
+  margin-left: 2em;
+}
+
+pre.prettyprint li {
+  background: none;
+  list-style-type: inherit;
+  padding-left: 0;
+}
+
+pre.prettyprint li code[data-lang]:before {
+  opacity: 1;
+}
+
+pre.prettyprint li:not(:first-child) code[data-lang]:before {
+  display: none;
+}
+
+// overrides for built-in Pygments & Rouge styles
+table.linenotable {
   border-collapse: separate;
   border: 0;
   margin-bottom: 0;
-  background: none;
+  background: none; // FIXME this wouldn't be required if a background was set on table.tableblock and not table
+  td[class] {
+    color: inherit;
+    vertical-align: top;
+    padding: 0;
+    line-height: inherit;
+    white-space: normal; // NOTE we don't want whitespace in the table elements themselves to cause a problem
+  }
+  td {
+    &.code {
+      padding-left: 0.75em;
+    }
+    &.linenos {
+      border-right: 1px solid currentColor;
+      opacity: 0.35;
+      padding-right: 0.5em;
+    }
+  }
 }
 
-table.pyhltable td {
-  vertical-align: top;
-  padding-top: 0;
-  padding-bottom: 0;
-  line-height: $pre-line-height;
-}
-
-table.pyhltable td.code {
-  padding-left: .75em;
-  padding-right: 0;
-}
-
-// QUESTION can't td:not(.code) be written as td.linenos?
-pre.pygments .lineno,
-table.pyhltable td:not(.code) {
-  color: #999;
-  padding-left: 0;
-  padding-right: .5em;
-  border-right: 1px solid $hr-border-color;
-}
-
+// NOTE pygments uses fixed-length line numbers (padded with spaces) in this case
 pre.pygments .lineno {
+  border-right: 1px solid currentColor;
+  opacity: 0.35;
   display: inline-block;
-  margin-right: .25em;
+  margin-right: 0.75em; // NOTE margin-right should match padding-left of code in table linenum-mode
+  &:before {
+    content: "";
+    margin-right: -0.125em;
+  }
 }
 
-table.pyhltable .linenodiv {
-  background: none !important;
-  padding-right: 0 !important;
-}
+// NOTE these overrides are needed to override hard-coded styles when pygments-css=inline
+// NOTE we decided to handle these by patching the HTML
+//table.pygments-table .linenodiv {
+//  background: none !important;
+//  padding-right: 0 !important;
+//}
 
 // TODO
 // - add centered option using margin-left: auto; margin-right: auto; padding-left: 1.5em;
@@ -744,7 +770,7 @@ table.pyhltable .linenodiv {
     margin-bottom: 0.75em;
   }
 
-  blockquote, blockquote p {
+  blockquote, p {
     color: $blockquote-font-color;
     font-size: 1.15rem;
     line-height: 1.75;
@@ -778,24 +804,9 @@ table.pyhltable .linenodiv {
   }
 
   .attribution {
-    //margin-top: 0.5rem;
-    margin-top: 0.5em;
+    margin-top: 0.75em;
     margin-right: 0.5ex;
     text-align: right;
-  }
-
-  .quoteblock {
-    margin-left: 0;
-    margin-right: 0;
-    padding: 0.5em 0;
-    border-left: 3px solid $blockquote-cite-font-color;
-
-    blockquote {
-      padding: 0 0 0 0.75em;
-      &:before {
-        display: none;
-      }
-    }
   }
 }
 
@@ -838,24 +849,47 @@ table.pyhltable .linenodiv {
   }
 }
 
-.quoteblock.abstract {
-  margin: 0 1em $paragraph-margin-bottom 1em;
-  display: block;
-  & > .title {
-    margin: 0 0 0.375em 0;
-    font-size: 1.15em;
-    text-align: center;
+.quoteblock {
+  &.abstract,
+  &.excerpt,
+  .quoteblock {
+    blockquote {
+      &:before {
+        display: none;
+      }
+    }
+
+    blockquote, p {
+      line-height: 1.6;
+      word-spacing: 0;
+    }
   }
 
-  blockquote, blockquote p {
-    //text-align: left;
-    word-spacing: 0;
-    line-height: 1.6;
+  &.abstract {
+    margin: 0 1em $paragraph-margin-bottom 1em;
+    display: block;
+    & > .title {
+      margin: 0 0 0.375em 0;
+      font-size: 1.15em;
+      text-align: center;
+    }
   }
 
-  blockquote, p {
-    &:before {
-      display: none;
+  &.excerpt,
+  .quoteblock {
+    margin: 0 0 $paragraph-margin-bottom 0;
+    padding: 0 0 0.25em 1em;
+    border-left: 0.25em solid $hr-border-color;
+    blockquote, p {
+      //color: rgba(0, 0, 0, 0.6);
+      color: inherit;
+      font-size: 1.0625rem;
+    }
+    .attribution {
+      //color: rgba(0, 0, 0, 0.6);
+      color: inherit;
+      text-align: left;
+      margin-right: 0;
     }
   }
 }
@@ -926,14 +960,18 @@ table.frame-topbot, table.frame-ends {
 }
 
 table.stripes-all tr,
-table.stripes-odd tr:nth-of-type(odd) {
+table.stripes-odd tr:nth-of-type(odd),
+table.stripes-even tr:nth-of-type(even),
+table.stripes-hover tr:hover {
   background: $table-even-row-bg;
 }
 
-table.stripes-none tr,
-table.stripes-odd tr:nth-of-type(even) {
-  background: none;
-}
+// NOTE removing default stripes using script instead
+//table.stripes-none tr,
+//table.stripes-odd tr:nth-of-type(even),
+//table.stripes-even tr:nth-of-type(odd) {
+//  background: none;
+//}
 
 @each $halign in (left, right, center) {
   th.halign-#{$halign},
@@ -980,9 +1018,9 @@ p.tableblock {
   font-size: 1em;
 }
 
-td > div.verse {
-  white-space: pre;
-}
+//td > div.verse {
+//  white-space: pre;
+//}
 
 // AsciiDoc list styles
 
@@ -1084,7 +1122,7 @@ ul.inline > li {
 .hdlist > table,
 .colist > table {
   border: 0;
-  background: none;
+  background: none; // FIXME this wouldn't be required if a background was set on table.tableblock and not table
   & > tbody > tr {
     background: none;
   }
@@ -1309,7 +1347,7 @@ sup.footnoteref {
     }
   }
 
-  //*:not(code) > .comment {
+  //:not(code) > .comment {
   //  background: yellow;
   //}
 }

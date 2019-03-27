@@ -92,7 +92,7 @@ body {
 
 @media #{$medium} {
   body.toc2 {
-    padding-left: 22em;
+    padding-left: 20em;
     padding-right: 0;
   }
 
@@ -114,14 +114,14 @@ body {
 
   body.toc2.toc-right {
     padding-left: 0;
-    padding-right: 22em;
+    padding-right: 20em;
   }
 }
 
 #footer {
   max-width: 100%;
   //margin-top: $panel-margin-bottom * 2;
-  background-color: $footer-bg;
+  background: $footer-bg;
   padding: $panel-padding;
 }
 
